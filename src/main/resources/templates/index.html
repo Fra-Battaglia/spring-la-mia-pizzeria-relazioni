@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>		
+		<meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org">
+		<title>Pizzeria</title>
+		<link rel="stylesheet" th:href="@{/css/style.css}">
+	</head>
+	
+	<body>
+		<h1>Menu Pizze</h1>
+	<ul>
+		<li
+			th:each="pizza : ${pizze}"
+			th:object="${pizza}"
+		>
+			<a th:href="@{/pizza/{id} (id=*{id})}">
+				[[ *{name} ]]
+			</a>
+		</li>
+	</ul>
+	<a href="pizza/new"><button>aggiungi</button></a>
+	</body>
+</html>

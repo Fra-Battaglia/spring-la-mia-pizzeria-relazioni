@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>		
+		<meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org">
+		<title>Pizza [[ ${pizza.name} ]]</title>
+		<link rel="stylesheet" th:href="@{/css/style.css}">
+	</head>
+	
+	<body th:object="${pizza}">
+		<h1>[[ *{name} ]]</h1>
+		<p>[[ *{description} ]]</p>
+		<img th:src="*{imgUrl}" th:alt="*{name}" class="show-img"/>
+		
+		<a href="/"><button>menu</button></a>
+	</body>
+</html>
