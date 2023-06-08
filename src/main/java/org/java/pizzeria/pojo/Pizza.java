@@ -1,9 +1,12 @@
 package org.java.pizzeria.pojo;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Pizza {
@@ -15,6 +18,7 @@ public class Pizza {
 	private String description;
 	private String imgUrl;
 	private Float price;
+	private boolean deleted;
 	
 	public Pizza() { }
 	public Pizza(String name, String description, String imgUrl, Float price) {
@@ -24,6 +28,9 @@ public class Pizza {
 		setImgUrl(imgUrl);
 		setPrice(price);
 	}
+	
+	@OneToMany(mappedBy = "pizza")
+	private List<Offer> offers;
 	
 	public int getId() {
 		return id;
@@ -58,6 +65,20 @@ public class Pizza {
 	}
 	public void setPrice(Float price) {
 		this.price = price;
+	}
+	
+	public boolean getDeleted() {
+		return deleted;
+	}
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
+	
+	public List<Offer> getOffers() {
+		return offers;
+	}
+	public void setOffers(List<Offer> offers) {
+		this.offers = offers;
 	}
 	
 	@Override

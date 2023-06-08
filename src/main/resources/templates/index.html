@@ -14,7 +14,19 @@
 			th:object="${pizza}"
 		>
 			<a th:href="@{/pizza/{id} (id=*{id})}">
-				[[ *{name} ]]
+				<h1>[[ *{name} ]]</h1>
+			</a>
+			
+			<a th:href="@{/pizza/edit/{id} (id=*{id})}">
+				Modifica
+			</a>
+			
+			<a th:href="@{/pizza/delete/{id} (id=*{id})}">
+				Elimina
+			</a>
+			
+			<a th:href="@{/pizza/soft-delete/{id} (id=*{id})}">
+				Elimina Soft
 			</a>
 		</li>
 	</ul>

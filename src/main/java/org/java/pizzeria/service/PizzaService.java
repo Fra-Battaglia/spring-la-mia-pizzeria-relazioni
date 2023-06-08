@@ -26,4 +26,8 @@ public class PizzaService {
 		
 		return pizzaRepo.findById(id);
 	}
+	public void deletePizza(Pizza pizza) {
+		
+		pizzaRepo.delete(pizza);
+	}
 }
