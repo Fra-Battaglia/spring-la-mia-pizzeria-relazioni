@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.java.pizzeria.service.IngredientService;
 import org.java.pizzeria.service.OfferService;
 //import org.java.pizzeria.service.OfferService;
 import org.java.pizzeria.service.PizzaService;
@@ -17,6 +18,7 @@ import org.java.pizzeria.service.PizzaService;
 import java.util.List;
 import java.util.Optional;
 
+import org.java.pizzeria.pojo.Ingredient;
 import org.java.pizzeria.pojo.Offer;
 import org.java.pizzeria.pojo.Pizza;
 //import org.java.pizzeria.repo.PizzaRepo;
@@ -29,6 +31,9 @@ public class PizzaController {
 	
 	@Autowired
 	private OfferService offerService;
+	
+	@Autowired 
+	private IngredientService ingredientService;
 	
 	@GetMapping("/") 
 		public String getPizzaIndex(Model model) {
@@ -45,7 +50,10 @@ public class PizzaController {
 	// Create
 	@GetMapping("pizza/new")
 		public String createNewPizza(Model model) {
-			// model.addAttribute("pizza", new Pizza());
+			List<Ingredient> ingredients = ingredientService.findAll();
+			
+			model.addAttribute("pizza", new Pizza());
+			model.addAttribute("ingredients", ingredients);
 			
 			return "new-pizza";
 		}
@@ -83,8 +91,11 @@ public class PizzaController {
 				@PathVariable("id") int id
 			) {
 		Optional<Pizza> pizzaOpt = pizzaService.findById(id);
+		List<Ingredient> ingredients = ingredientService.findAll();
+		
 		Pizza pizza = pizzaOpt.get();
 		model.addAttribute("pizza", pizza);
+		model.addAttribute("ingredients", ingredients);
 		
 		return "edit-pizza";
 	}

@@ -8,6 +8,9 @@
 	
 	<body>
 		<h1>Menu Pizze</h1>
+		<a th:href="@{/pizza/new}">
+			<button>Aggiungi una pizza</button>
+		</a>
 	<ul>
 		<li
 			th:each="pizza : ${pizze}"

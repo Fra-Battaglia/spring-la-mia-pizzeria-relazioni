@@ -35,6 +35,23 @@
 				<input type="number" id="price" name="price" th:value="*{price}">
 			</div>
 			
+			<div>
+				<label>Ingredienti:</label>
+				<div 
+					th:each="ingredient : ${ingredients}"
+					th:object="${ingredient}"
+				>
+					<input 
+						type="checkbox" 
+						name="ingredients" 
+						th:value="*{id}"
+						th:id="*{name}"
+						th:checked="${pizza.ingredients.contains(ingredient)}"
+					>
+					<label th:for="*{name}">[[ *{name} ]]</label>
+				</div>
+			</div>
+			
 			<div>				
 				<input type="submit" value="save">
 			</div>
