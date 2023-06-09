@@ -1,5 +1,7 @@
 package org.java.pizzeria.controller;
 
+import java.util.Optional;
+
 import org.java.pizzeria.pojo.Offer;
 import org.java.pizzeria.pojo.Pizza;
 import org.java.pizzeria.service.OfferService;
@@ -36,5 +38,33 @@ public class OfferController {
 		offerService.save(offer);
 		
 		return "redirect:/pizza/{id}";
+	}
+	
+	// Update
+	@GetMapping("offer/{id}/edit")
+	public String editOffer(
+				Model model,
+				@PathVariable("id") int id
+			) {
+		Optional<Pizza> optPizza = pizzaService.findById(id);
+		Pizza pizza = optPizza.get();
+		
+		Optional<Offer> offerOpt = offerService.findById(id);
+		Offer offer = offerOpt.get();
+		
+		model.addAttribute("pizza", pizza);
+		model.addAttribute("offer", offer);
+		
+		return "edit-offer";
+	}
+	
+	@PostMapping("offer/{id}/edit")
+	public String updateOffer(
+			@PathVariable("id") int id,
+			@ModelAttribute Offer offer
+		) {
+		offerService.save(offer);
+		
+		return "redirect:/";
 	}
 }

@@ -10,13 +10,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.java.pizzeria.service.OfferService;
 //import org.java.pizzeria.service.OfferService;
 import org.java.pizzeria.service.PizzaService;
 
 import java.util.List;
 import java.util.Optional;
 
-//import org.java.pizzeria.pojo.Offer;
+import org.java.pizzeria.pojo.Offer;
 import org.java.pizzeria.pojo.Pizza;
 //import org.java.pizzeria.repo.PizzaRepo;
 
@@ -26,11 +27,17 @@ public class PizzaController {
 	@Autowired
 	private PizzaService pizzaService;
 	
+	@Autowired
+	private OfferService offerService;
+	
 	@GetMapping("/") 
 		public String getPizzaIndex(Model model) {
 			
 			List<Pizza> pizze = pizzaService.findAll();
 			model.addAttribute("pizze", pizze);
+			
+			List<Offer> offers = offerService.findAll();
+			model.addAttribute("offers", offers);
 			
 			return "index";
 		}
@@ -60,7 +67,11 @@ public class PizzaController {
 			Optional<Pizza> optPizza = pizzaService.findById(id);
 			Pizza pizza = optPizza.get();
 			
+			Optional<Offer> optOffer = offerService.findById(id);
+			Offer offer = optOffer.get();
+			
 			model.addAttribute("pizza", pizza);
+			model.addAttribute("offer", offer);
 		
 			return "pizza";
 		}

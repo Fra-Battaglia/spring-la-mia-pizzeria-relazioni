@@ -82,6 +82,11 @@ public class Offer {
 		this.pizza = pizza;
 	}
 	
+	public Float getFinalPrice() {
+		
+		return (pizza.getPrice() * (100 - getDiscount())) / 100f;
+	}
+	
 	@Override
 	public String toString() {
 		return "[" + getId() + "] " 
